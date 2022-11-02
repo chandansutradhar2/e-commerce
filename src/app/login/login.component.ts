@@ -19,13 +19,13 @@ export class LoginComponent implements OnInit {
       this.msgSvc.add({
         severity: 'success',
         life: 3000,
-        key: 'tr',
+        key: 'k',
         detail: 'Welcome back Mr Chandan',
       });
     } else {
       this.msgSvc.add({
-        severity: 'warn',
-        key: 'tr',
+        severity: 'error',
+        key: 'k',
         detail: 'Invalid OTP entered',
       });
     }
