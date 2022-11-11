@@ -6,11 +6,11 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastModule } from 'primeng/toast';
-import {TabViewModule} from 'primeng/tabview';
-import {CheckboxModule} from 'primeng/checkbox';
-import {RadioButtonModule} from 'primeng/radiobutton';
-import {RippleModule} from 'primeng/ripple';
-
+import { TabViewModule } from 'primeng/tabview';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { RippleModule } from 'primeng/ripple';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [],
@@ -22,7 +22,8 @@ import {RippleModule} from 'primeng/ripple';
     ButtonModule,
     FormsModule,
     ToastModule,
-TabViewModule
+    DropdownModule,
+    TabViewModule,
   ],
   exports: [
     CommonModule,
@@ -32,7 +33,8 @@ TabViewModule
     ButtonModule,
     FormsModule,
     ToastModule,
-    TabViewModule
+    TabViewModule,
+    DropdownModule,
   ],
 })
 export class UIModule {}

@@ -1,35 +1,41 @@
-<div class="container">
-  <div class="form">
-    <p-card>
-      <p-tabView>
-        <p-tabPanel header="Login">
-          <form>
-            <div class="col-12 md:col-4" style="margin: 5px">
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"
-                  ><i class="pi pi-user"></i
-                ></span>
-                <input type="text" pInputText placeholder="Email" [formControl]="email" />
-              </div>
-            </div>
-            <div class="col-12 md:col-4" style="margin: 5px">
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"
-                  ><i class="pi pi-user"></i
-                ></span>
-                <input type="password" pInputText placeholder="Password" [formControl]="password" />
-              </div>
-            </div>
-            <p-button
-              label="Login"
-              iconPos="right"
-              class="btn"
-              (onClick)="login()"
-            ></p-button>
-          </form>
-        </p-tabPanel>
-        <p-tabPanel header="Register"> Register Content </p-tabPanel>
-      </p-tabView>
-    </p-card>
+<form>
+  <div class="col-12 md:col-4" style="margin: 5px">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"
+        ><i class="pi pi-user"></i
+      ></span>
+      <input
+        type="text"
+        pInputText
+        placeholder="Email"
+        [formControl]="email"
+      />
+    </div>
+    <div *ngIf="email.errors && (email.dirty || email.touched)">
+      <span *ngIf="email.invalid">Please enter valid email </span
+      ><br />
+      <span *ngIf="email.hasError('required')"
+        >email cannot be blank
+      </span>
+    </div>
   </div>
-</div>
+  <div class="col-12 md:col-4" style="margin: 5px">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"
+        ><i class="pi pi-user"></i
+      ></span>
+      <input
+        type="password"
+        pInputText
+        placeholder="Password"
+        [formControl]="password"
+      />
+    </div>
+  </div>
+  <p-button
+    label="Login"
+    iconPos="right"
+    class="btn"
+    (onClick)="login()"
+  ></p-button>
+</form>

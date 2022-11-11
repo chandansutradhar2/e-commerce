@@ -18,12 +18,12 @@ export class HomeComponent implements OnInit {
       {
         label: 'Login',
         expanded: false,
-        routerLink: 'auth/login',
+        routerLink: 'auth',
       },
       {
         label: 'Register',
         expanded: false,
-        routerLink: 'auth/register',
+        routerLink: 'auth',
       },
       {
         label: 'Admin Panel',

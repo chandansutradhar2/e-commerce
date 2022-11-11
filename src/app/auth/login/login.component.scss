@@ -1,48 +1,6 @@
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  background-color: dodgerblue;
-  justify-content: center;
-}
 
-.form {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
 
 .btn {
   width: 100%;
   margin: 5px;
 }
-
-// .left {
-//   width: 50vw;
-//   background-color: rebeccapurple;
-//   height: 100%;
-//   display: flex;
-//   align-items: stretch;
-//   justify-content: space-around;
-//   align-content: center;
-//   flex-wrap: nowrap;
-//   flex-direction: column;
-// }
-
-// .right {
-//   width: 50vw;
-//   background-color: rgb(178, 134, 221);
-//   height: 100%;
-// }
-
-// :host ::ng-deep {
-//   .p-toast-message-custom {
-//     background-color: #e1cfe7;
-//     border: solid #8a427a;
-//     border-width: 0 0 0 6px;
-//     color: #2c1e30;
-//     .p-toast-icon-close {
-//       color: #2c1e30;
-//     }
-//   }
-// }
