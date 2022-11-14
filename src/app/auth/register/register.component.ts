@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
+import { comparePasswordValidator } from './confirm-password.validator';
 
 @Component({
   selector: 'app-register',
@@ -15,15 +16,20 @@ export class RegisterComponent implements OnInit {
 
   regFrmGrp: FormGroup;
   constructor(fb: FormBuilder) {
-    this.regFrmGrp = fb.group({
-      fullName: [''],
-      email: [''],
-      mobileNo: [''],
-      password: [''],
-      confirmPassword: [''],
-      dob: [''],
-      gender: [''],
-    });
+    this.regFrmGrp = fb.group(
+      {
+        fullName: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
+        mobileNo: [''],
+        password: [''],
+        confirmPassword: [''],
+        dob: [''],
+        gender: [''],
+      },
+      {
+        validators: [],
+      }
+    );
   }
 
   ngOnInit(): void {}
@@ -32,16 +38,16 @@ export class RegisterComponent implements OnInit {
     console.log(this.regFrmGrp);
 
     if (this.regFrmGrp.valid) {
+      let data = this.regFrmGrp.value;
       let user: User = {
-        dob: this.regFrmGrp.controls['dob'].value,
-        email: this.regFrmGrp.controls['email'].value,
-        fullName: this.regFrmGrp.controls['fullName'].value,
-        gender: this.regFrmGrp.controls['gender'].value,
-        mobileNo: this.regFrmGrp.controls['mobileNo'].value,
-        password: this.regFrmGrp.controls['password'].value,
+        dob: data.dob,
+        email: data.email,
+        fullName: data.fullName,
+        gender: data.gender,
+        mobileNo: data.mobileNo,
+        password: data.password,
         picUrl: '',
       };
-
       console.log(user);
       setTimeout(() => {
         this.regFrmGrp.reset();
