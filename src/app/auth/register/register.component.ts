@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   ];
 
   regFrmGrp: FormGroup;
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private http: HttpClient) {
     this.regFrmGrp = fb.group(
       {
         fullName: ['', [Validators.required]],
@@ -25,6 +26,14 @@ export class RegisterComponent implements OnInit {
         confirmPassword: [''],
         dob: [''],
         gender: [''],
+        address: fb.group({
+          line1: ['NPST 429, lodha `'],
+          line2: ['wagle estate'],
+          city: ['thane'],
+          state: ['mh'],
+          country: ['in'],
+          pinCode: ['410086'],
+        }),
       },
       {
         validators: [],
@@ -35,8 +44,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   register() {
-    console.log(this.regFrmGrp);
-
     if (this.regFrmGrp.valid) {
       let data = this.regFrmGrp.value;
       let user: User = {
@@ -47,11 +54,25 @@ export class RegisterComponent implements OnInit {
         mobileNo: data.mobileNo,
         password: data.password,
         picUrl: '',
+        address: {
+          city: data.address.city,
+          country: data.address.country,
+          line1: data.address.line1,
+          line2: data.address.line2,
+          pinCode: data.address.pincCode,
+          state: data.address.state,
+        },
       };
-      console.log(user);
-      setTimeout(() => {
-        this.regFrmGrp.reset();
-      }, 2000);
+
+      console.log('formGroup=>', this.regFrmGrp, 'user=>', user);
+
+      this.http
+        .post('http://localhost:3000/register', user)
+        .subscribe((r: any) => {
+          r.status
+            ? alert('account created successfully')
+            : alert('failed to create account');
+        });
     } else {
       console.log('form is invalid pls fill it');
     }

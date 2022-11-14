@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SocialLoginComponent } from './social-login/social-login.component';
 import { MainComponent } from './main/main.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const authRoutes: Routes = [
   {
@@ -30,7 +31,7 @@ const authRoutes: Routes = [
     SocialLoginComponent,
     MainComponent,
   ],
-  imports: [UIModule, RouterModule.forChild(authRoutes), ReactiveFormsModule],
+  imports: [HttpClientModule, UIModule, RouterModule.forChild(authRoutes), ReactiveFormsModule],
   exports: [RouterModule],
 })
 export class AuthModule {}

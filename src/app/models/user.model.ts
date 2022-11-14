@@ -6,4 +6,12 @@ export interface User {
   mobileNo: string;
   dob: string;
   picUrl?: string;
+  address?: {
+    line1: string;
+    line2: string;
+    city: string;
+    state: string;
+    country: string;
+    pinCode: string;
+  };
 }
