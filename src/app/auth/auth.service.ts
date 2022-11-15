@@ -21,7 +21,7 @@ export class AuthService {
     });
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Promise<User> {
     return new Promise((resolve, reject) => {
       this.http
         .post('http://localhost:3000/login', {
@@ -38,7 +38,8 @@ export class AuthService {
             }
           },
           (err) => {
-            reject(err.error.msg);
+            console.log(err);
+            reject('authentication failed due to network error');
           }
         );
     });

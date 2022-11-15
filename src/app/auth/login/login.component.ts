@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
   email: FormControl;
   password: FormControl;
 
-  constructor(private msgSvc: MessageService) {
+  constructor(private msgSvc: MessageService, private authSvc: AuthService) {
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', [
       Validators.required,
@@ -30,22 +32,29 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    console.log(this.email, this.password);
-
-    alert(`email:${this.email.value}, password: ${this.password.value}`);
-
-    if (this.mobileNo == '8080811145' && this.otp == '1234') {
-      this.msgSvc.add({
-        severity: 'success',
-        life: 3000,
-        key: 'k',
-        detail: 'Welcome back Mr Chandan',
-      });
+    if (this.email.valid && this.password.valid) {
+      this.authSvc
+        .login(this.email.value, this.password.value)
+        .then((r) => {
+          this.msgSvc.add({
+            severity: 'success',
+            life: 2000,
+            detail: `Welcome back ${r.fullName}`,
+            key: 'j',
+          });
+        })
+        .catch((err) => {
+          this.msgSvc.add({
+            severity: 'error',
+            detail: err,
+            key: 'j',
+          });
+        });
     } else {
       this.msgSvc.add({
         severity: 'error',
-        key: 'k',
-        detail: 'Invalid OTP entered',
+        detail: 'please add email and password before login',
+        key: 'j',
       });
     }
   }
