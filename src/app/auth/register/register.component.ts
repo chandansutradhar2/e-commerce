@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from '../auth.service';
 import { comparePasswordValidator } from './confirm-password.validator';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  providers: [MessageService],
 })
 export class RegisterComponent implements OnInit {
   genders: any[] = [
@@ -16,7 +19,11 @@ export class RegisterComponent implements OnInit {
   ];
 
   regFrmGrp: FormGroup;
-  constructor(fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    fb: FormBuilder,
+    public msgSvc: MessageService,
+    private authSvc: AuthService
+  ) {
     this.regFrmGrp = fb.group(
       {
         fullName: ['', [Validators.required]],
@@ -64,17 +71,30 @@ export class RegisterComponent implements OnInit {
         },
       };
 
-      console.log('formGroup=>', this.regFrmGrp, 'user=>', user);
-
-      this.http
-        .post('http://localhost:3000/register', user)
-        .subscribe((r: any) => {
-          r.status
-            ? alert('account created successfully')
-            : alert('failed to create account');
+      this.authSvc
+        .createAccount(user)
+        .then(() => {
+          this.msgSvc.add({
+            severity: 'success',
+            detail: 'account created successfully',
+            life: 2000,
+            key: 'k',
+          });
+        })
+        .catch((err) => {
+          this.msgSvc.add({
+            severity: 'error',
+            detail: err,
+            life: 2000,
+            key: 'k',
+          });
         });
     } else {
-      console.log('form is invalid pls fill it');
+      this.msgSvc.add({
+        severity: 'error',
+        key: 'k',
+        detail: 'please fill up the form properly!!!!!',
+      });
     }
   }
 }

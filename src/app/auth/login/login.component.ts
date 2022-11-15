@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
       Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/),
     ]);
 
-    
     this.password.valueChanges.subscribe((res) => {
       console.log(res);
       //password strength goes here

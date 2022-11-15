@@ -11,6 +11,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RippleModule } from 'primeng/ripple';
 import { DropdownModule } from 'primeng/dropdown';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
   declarations: [],
@@ -24,6 +26,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ToastModule,
     DropdownModule,
     TabViewModule,
+    MessagesModule,
+    MessageModule,
   ],
   exports: [
     CommonModule,
@@ -35,6 +39,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ToastModule,
     TabViewModule,
     DropdownModule,
+    MessageModule,
+    MessagesModule,
   ],
 })
 export class UIModule {}

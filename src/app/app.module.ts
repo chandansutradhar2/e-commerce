@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { CartComponent } from './cart/cart.component';
 import { AdminModule } from './admin/admin.module';
 import { UIModule } from './uimodule/uimodule.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,13 @@ import { UIModule } from './uimodule/uimodule.module';
     ReferenceComponent,
     CartComponent,
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UIModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    UIModule,
+  ],
   providers: [MessageService],
   bootstrap: [AppComponent],
 })
