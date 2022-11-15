@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { StateService } from '../services/state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private stateSvc: StateService) {}
 
   createAccount(user: User): Promise<boolean | any> {
     return new Promise((resolve, reject) => {
@@ -32,6 +33,7 @@ export class AuthService {
           (r: any) => {
             if (r.status) {
               let user: User = r.data as User;
+              this.stateSvc.user = user;
               resolve(user);
             } else {
               reject(r.msg);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from '../auth.service';
@@ -16,7 +17,11 @@ export class LoginComponent implements OnInit {
   email: FormControl;
   password: FormControl;
 
-  constructor(private msgSvc: MessageService, private authSvc: AuthService) {
+  constructor(
+    private router: Router,
+    private msgSvc: MessageService,
+    private authSvc: AuthService
+  ) {
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', [
       Validators.required,
@@ -42,6 +47,10 @@ export class LoginComponent implements OnInit {
             detail: `Welcome back ${r.fullName}`,
             key: 'j',
           });
+
+          setTimeout(() => {
+            this.router.navigate(['']);
+          }, 2000);
         })
         .catch((err) => {
           this.msgSvc.add({
