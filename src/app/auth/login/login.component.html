@@ -1,29 +1,17 @@
 <form>
   <div class="col-12 md:col-4" style="margin: 5px">
     <div class="p-inputgroup">
-      <span class="p-inputgroup-addon"
-        ><i class="pi pi-user"></i
-      ></span>
-      <input
-        type="text"
-        pInputText
-        placeholder="Email"
-        [formControl]="email"
-      />
+      <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+      <input type="text" pInputText placeholder="Email" [formControl]="email" />
     </div>
     <div *ngIf="email.errors && (email.dirty || email.touched)">
-      <span *ngIf="email.invalid">Please enter valid email </span
-      ><br />
-      <span *ngIf="email.hasError('required')"
-        >email cannot be blank
-      </span>
+      <span *ngIf="email.invalid">Please enter valid email </span><br />
+      <span *ngIf="email.hasError('required')">email cannot be blank </span>
     </div>
   </div>
   <div class="col-12 md:col-4" style="margin: 5px">
     <div class="p-inputgroup">
-      <span class="p-inputgroup-addon"
-        ><i class="pi pi-user"></i
-      ></span>
+      <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
       <input
         type="password"
         pInputText
